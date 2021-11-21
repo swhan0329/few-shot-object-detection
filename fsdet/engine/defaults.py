@@ -312,7 +312,7 @@ class DefaultTrainer(SimpleTrainer):
                 find_unused_parameters=True,
             )
         super().__init__(model, data_loader, optimizer)
-
+    
         self.scheduler = self.build_lr_scheduler(cfg, optimizer)
         # Assume no other objects need to be checkpointed.
         # We can later make it checkpoint the stateful hooks

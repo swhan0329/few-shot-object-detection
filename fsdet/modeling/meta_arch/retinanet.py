@@ -87,8 +87,6 @@ class RetinaNet(DenseDetector):
         super().__init__(
             backbone, head, head_in_features, pixel_mean=pixel_mean, pixel_std=pixel_std
         )
-        self.device = torch.device('cuda')
-        
         self.num_classes = num_classes
 
         # Anchors
@@ -109,8 +107,7 @@ class RetinaNet(DenseDetector):
         # Vis parameters
         self.vis_period = vis_period
         self.input_format = input_format
-        self.to(self.device)
-        
+
     @classmethod
     def from_config(cls, cfg):
         backbone = build_backbone(cfg)

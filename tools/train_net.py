@@ -80,14 +80,13 @@ def setup(args):
     if args.opts:
         cfg.merge_from_list(args.opts)
     cfg.freeze()
-    set_global_cfg(cfg)
+    #set_global_cfg(cfg)
     default_setup(cfg, args)
     return cfg
 
 
 def main(args):
     cfg = setup(args)
-
     if args.eval_only:
         model = Trainer.build_model(cfg)
         DetectionCheckpointer(model, save_dir=cfg.OUTPUT_DIR).resume_or_load(
