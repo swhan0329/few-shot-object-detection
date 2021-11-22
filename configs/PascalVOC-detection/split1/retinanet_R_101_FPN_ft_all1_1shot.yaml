@@ -1,4 +1,4 @@
-_BASE_: "../Base-RetinaNet.yaml"
+_BASE_: "../../Base-RetinaNet.yaml"
 MODEL:
   WEIGHTS: "checkpoints/voc/retinanet/retinanet_R_101_FPN_base1/model_reset_surgery.pth"
   MASK_ON: False

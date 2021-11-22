@@ -36,8 +36,8 @@ def parse_args():
         type=str,
         nargs="+",
         default=[
-            "roi_heads.box_predictor.cls_score",
-            "roi_heads.box_predictor.bbox_pred",
+            "head.cls_score",
+            "head.bbox_pred",
         ],
         help="Target parameter names",
     )
@@ -76,11 +76,11 @@ def ckpt_surgery(args):
             prev_cls -= 1
         if is_weight:
             feat_size = pretrained_weight.size(1)
-            new_weight = torch.rand((tar_size, feat_size))
+            new_weight = torch.rand((tar_size, feat_size,3,3))
             torch.nn.init.normal_(new_weight, 0, 0.01)
         else:
             new_weight = torch.zeros(tar_size)
-        print(":prev_cls",prev_cls)
+        print("prev_cls",prev_cls)
         if args.coco or args.lvis:
             for i, c in enumerate(BASE_CLASSES):
                 idx = i if args.coco else c

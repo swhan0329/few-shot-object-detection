@@ -80,7 +80,7 @@ def setup(args):
     if args.opts:
         cfg.merge_from_list(args.opts)
     cfg.freeze()
-    #set_global_cfg(cfg)
+    set_global_cfg(cfg)
     default_setup(cfg, args)
     return cfg
 
