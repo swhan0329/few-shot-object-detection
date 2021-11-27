@@ -4,10 +4,10 @@ MODEL:
   MASK_ON: False
   RESNETS:
     DEPTH: 101
-  ROI_HEADS:
+  RETINANET:
     NUM_CLASSES: 20
-    OUTPUT_LAYER: "CosineSimOutputLayers"
-    FREEZE_FEAT: True
+    # OUTPUT_LAYER: "CosineSimOutputLayers"
+    # FREEZE_FEAT: True
   BACKBONE:
     FREEZE: True
   PROPOSAL_GENERATOR:
@@ -20,7 +20,7 @@ DATASETS:
   TEST: ('voc_2007_test_all1',)
 SOLVER:
   IMS_PER_BATCH: 16
-  BASE_LR: 0.001
+  BASE_LR: 0.01
   STEPS: (3000,)
   MAX_ITER: 4000
   CHECKPOINT_PERIOD: 500

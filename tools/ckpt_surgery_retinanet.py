@@ -69,18 +69,16 @@ def ckpt_surgery(args):
         weight_name = param_name + (".weight" if is_weight else ".bias")
         pretrained_weight = ckpt["model"][weight_name]
         print(ckpt["model"].keys())
-        print("size===",pretrained_weight.shape)
-        print("tar_size",tar_size)
         prev_cls = pretrained_weight.size(0)
-        if "cls_score" in param_name:
-            prev_cls -= 1
+        # if "cls_score" in param_name:
+        #     prev_cls -= 9 #1
+        tar_size -= 1
         if is_weight:
             feat_size = pretrained_weight.size(1)
-            new_weight = torch.rand((tar_size, feat_size,3,3))
+            new_weight = torch.rand((tar_size*9, feat_size,3,3)) # torch.rand((tar_size, feat_size,3,3))
             torch.nn.init.normal_(new_weight, 0, 0.01)
         else:
-            new_weight = torch.zeros(tar_size)
-        print("prev_cls",prev_cls)
+            new_weight = torch.zeros(tar_size*9)
         if args.coco or args.lvis:
             for i, c in enumerate(BASE_CLASSES):
                 idx = i if args.coco else c
