@@ -103,6 +103,7 @@ def default_argument_parser():
     parser.add_argument(
         "--num-gpus", type=int, default=1, help="number of gpus *per machine*"
     )
+    parser.add_argument("--seed", type=int, default=777, help="seed config")
     parser.add_argument("--num-machines", type=int, default=1)
     parser.add_argument(
         "--machine-rank",
@@ -176,7 +177,8 @@ def default_setup(cfg, args):
         logger.info("Full config saved to {}".format(os.path.abspath(path)))
 
     # make sure each worker has a different, yet deterministic seed if specified
-    seed_all_rng(None if cfg.SEED < 0 else cfg.SEED + rank)
+    #seed_all_rng(None if cfg.SEED < 0 else cfg.SEED + rank)
+    seed_all_rng(None if args.seed < 0 else args.seed + rank)
 
     # cudnn benchmark has large overhead. It shouldn't be used considering the small size of
     # typical validation set.
